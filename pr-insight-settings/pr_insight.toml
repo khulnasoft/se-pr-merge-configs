@@ -1,0 +1,50 @@
+[github_app]
+# For PR Insight Pro/Enterprise 💎
+pr_commands = [
+    "/describe",
+    "/review",
+    "/improve"
+]
+
+[pr_description] # /describe #
+generate_ai_title=false
+extra_instructions = ""
+enable_pr_type=true
+# describe as comment
+publish_description_as_comment=false
+publish_description_as_comment_persistent=true
+## changes walkthrough section
+inline_file_summary=false # false, true, 'table'
+# markers
+use_description_markers=false
+include_generated_by_header=true
+
+[pr_reviewer] # /review #
+# enable/disable features
+require_can_be_split_review=false
+require_ticket_analysis_review=true
+# general options
+num_code_suggestions=0
+inline_code_comments = false
+extra_instructions = ""
+# review labels
+enable_review_labels_security=true
+enable_review_labels_effort=true
+
+[pr_code_suggestions] # /improve #
+commitable_code_suggestions = false
+extra_instructions = ""
+# enable to apply suggestion 💎
+apply_suggestions_checkbox=true
+# suggestions scoring
+suggestions_score_threshold=0 # [0-10]| recommend not to set this value above 8, since above it may clip highly relevant suggestions
+# self-review checkbox
+demand_code_suggestions_self_review=false # add a checkbox for the author to self-review the code suggestions
+code_suggestions_self_review_text= "**Author self-review**: I have reviewed the PR code suggestions, and addressed the relevant ones."
+approve_pr_on_self_review=false # Pro feature. if true, the PR will be auto-approved after the author clicks on the self-review checkbox
+fold_suggestions_on_self_review=true # Pro feature. if true, the code suggestions will be folded after the author clicks on the self-review checkbox
+
+[best_practices]
+#By default, PR Merge will look for a local best_practices.md wiki file in the root of the relevant local repo.
+#If you want to enable also a global best_practices.md wiki file, set first in the global configuration file
+enable_global_best_practices=false
