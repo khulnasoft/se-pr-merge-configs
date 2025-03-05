@@ -1,1 +1,0 @@
-# se-pr-merge-configs
