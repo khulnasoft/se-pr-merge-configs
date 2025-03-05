@@ -1,0 +1,150 @@
+[bitbucket_app]
+# For PR Insight Pro/Enterprise 💎
+pr_commands = [
+    "/describe",
+    "/review",
+    "/improve --pr_code_suggestions.suggestions_score_threshold=7",
+]
+
+
+[pr_description] # /describe #
+publish_labels=true
+add_original_user_description=true
+generate_ai_title=false
+use_bullet_points=true
+extra_instructions = ""
+enable_pr_type=true
+final_update_message = true
+enable_help_text=false
+enable_help_comment=true
+# describe as comment
+publish_description_as_comment=false
+publish_description_as_comment_persistent=true
+## changes walkthrough section
+enable_semantic_files_types=true
+collapsible_file_list='adaptive' # true, false, 'adaptive'
+# markers
+use_description_markers=false
+include_generated_by_header=true
+# large pr mode 💎
+enable_large_pr_handling=true
+max_ai_calls=4
+async_ai_calls=true
+mention_extra_files=true
+
+
+[pr_reviewer] # /review #
+# enable/disable features
+require_score_review=false
+require_tests_review=true
+require_estimate_effort_to_review=true
+require_can_be_split_review=false
+require_security_review=true
+extra_issue_links=false
+# soc2
+require_soc2_ticket=false
+soc2_ticket_prompt="Does the PR description include a link to ticket in a project management system (e.g., Jira, Asana, Trello, etc.) ?"
+# general options
+num_code_suggestions=0
+inline_code_comments = false
+ask_and_reflect=false
+#automatic_review=true
+persistent_comment=true
+extra_instructions = ""
+final_update_message = true
+# review labels
+enable_review_labels_security=true
+enable_review_labels_effort=true
+# specific configurations for incremental review (/review -i)
+require_all_thresholds_for_incremental_review=false
+minimal_commits_for_incremental_review=0
+minimal_minutes_for_incremental_review=0
+enable_help_text=false # Determines whether to include help text in the PR review. Enabled by default.
+# auto approval
+enable_auto_approval=false
+maximal_review_effort=5
+
+
+[pr_code_suggestions] # /improve #
+max_context_tokens=10000
+num_code_suggestions=4
+commitable_code_suggestions = false
+extra_instructions = ""
+rank_suggestions = false
+enable_help_text=false
+persistent_comment=true
+max_history_len=4
+# enable to apply suggestion 💎
+apply_suggestions_checkbox=true
+# suggestions scoring
+self_reflect_on_suggestions=true
+suggestions_score_threshold=0 # [0-10]. highly recommend not to set this value above 8, since above it may clip highly relevant suggestions
+# params for '/improve --extended' mode
+auto_extended_mode=true
+num_code_suggestions_per_chunk=4
+max_number_of_calls = 3
+parallel_calls = true
+rank_extended_suggestions = false
+final_clip_factor = 0.8
+# self-review checkbox
+demand_code_suggestions_self_review=false # add a checkbox for the author to self-review the code suggestions
+code_suggestions_self_review_text= "**Author self-review**: I have reviewed the PR code suggestions, and addressed the relevant ones."
+approve_pr_on_self_review=false # Pro feature. if true, the PR will be auto-approved after the author clicks on the self-review checkbox
+# Suggestion impact
+publish_post_process_suggestion_impact=true
+
+
+[pr_custom_prompt] # /custom_prompt #
+prompt = """\
+The code suggestions should focus only on the following:
+- ...
+- ...
+...
+"""
+suggestions_score_threshold=0
+num_code_suggestions_per_chunk=4
+self_reflect_on_custom_suggestions=true
+enable_help_text=false
+
+
+[pr_questions] # /ask #
+enable_help_text=false
+
+
+[pr_update_changelog] # /update_changelog #
+push_changelog_changes=false
+extra_instructions = ""
+
+
+[pr_test] # /test #
+extra_instructions = ""
+testing_framework = "" # specify the testing framework you want to use
+num_tests=3            # number of tests to generate. max 5.
+avoid_mocks=true       # if true, the generated tests will prefer to use real objects instead of mocks
+file = ""              # in case there are several components with the same name, you can specify the relevant file
+class_name = ""        # in case there are several methods with the same name in the same file, you can specify the relevant class name
+enable_help_text=false
+
+
+[pr_improve_component] # /improve_component #
+num_code_suggestions=4
+extra_instructions = ""
+file = ""              # in case there are several components with the same name, you can specify the relevant file
+class_name = ""        # in case there are several methods with the same name in the same file, you can specify the relevant class name
+
+
+[checks] # /checks (pro feature) # 💎
+enable_auto_checks_feedback=true
+excluded_checks_list=["lint"] # list of checks to exclude, for example: ["check1", "check2"]
+persistent_comment=true
+enable_help_text=true
+final_update_message = false
+
+
+[pr_find_similar_component]
+class_name = ""
+file = ""
+search_from_org = false
+allow_fallback_less_words = true
+number_of_keywords = 5
+number_of_results = 5
